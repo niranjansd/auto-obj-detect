@@ -167,6 +167,12 @@ function renderOption(parent, text, value) {
   parent.appendChild(option)
 }
 
+function setImageVisible(id, visible) {
+  var img = document.getElementById(id);
+  // img.style.visibility = (visible ? 'visible' : 'hidden');
+  img.style.display = (visible ? 'visible' : 'none');
+}
+
 async function ImageSlider(i) {
   //set the number of slider show
   const imgFolder = $('#queryImgUploadFolderInput').get(0).files

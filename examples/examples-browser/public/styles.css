@@ -65,6 +65,11 @@
   margin-bottom: 10px;
 }
 
+#noshow {
+  display: none;
+  visibility: hidden;
+}
+
 #overlay, .overlay {
   position: absolute;
   top: 0;

@@ -1,3 +1,5 @@
+var slideIndex = 0;
+
 async function onSelectedImageChanged(uri) {
   const img = await faceapi.fetchImage(uri)
   // $(`#inputImg`).get(0).src = img.src
@@ -6,12 +8,29 @@ async function onSelectedImageChanged(uri) {
   updateResults()
 }
 
-// function LoadNthImg(n) {
-//   const imgFolder = $('#queryImgUploadFolderInput').get(0).files
-//   const img = await faceapi.bufferToImage(imgFolder[n])
-//   $(`#sliderImg`).get(0).src = img.src
-//   updateResults()
-// }
+async function LoadNthImg(n) {
+  if (images.length == 1)
+    return
+  if (n >= images.length) {
+    // n -= imgFolder.length;
+    n = images.length - 1;
+    return
+  }
+  else if (n < 0 && Math.abs(n) <= images.length) {
+    // n += imgFolder.length;
+    n = 0;
+    return
+  }
+  slideIndex = n
+  $(`#sliderImg`).get(0).src = images[n].src
+  updateResults()
+}
+
+async function LoadIthImg(n) {
+  console.log(n)
+  console.log(slideIndex + n)
+  LoadNthImg(slideIndex + n)
+}
 
 async function loadImageFromUrl(url) {
   const img = await requestExternalImage($('#imgUrlInput').val())
@@ -35,6 +54,7 @@ async function loadAllImagesFromFolder() {
   const imgFolder = $('#queryImgUploadFolderInput').get(0).files
   // console.log(imgFolder)
   // console.log(imgFolder[0])
+  // console.log(imgFolder[1])
   var numFiles = imgFolder.length
   // console.log(numFiles)
   // var files = [...imgFolder].map(f => f.name)
@@ -45,17 +65,23 @@ async function loadAllImagesFromFolder() {
   // console.log([...Array(numFiles).keys()])
   // const img = await faceapi.bufferToImage(imgFolder)
   // let images = await [...Array(numFiles).keys()].map(idx => faceapi.bufferToImage(imgFolder[idx]))
-  var images = []
+  // var container = document.getElementById('inputMultipleImg');
+  // for (var i = 0, j = imgs.length; i < j; i++) {
+  //   const img = await faceapi.bufferToImage(imgFolder[i]);
+  //   container.appendChild(img.src);
+  // }
+
+  // var images = []
   for (let i = 0; i < numFiles; i++) {
     const img = await faceapi.bufferToImage(imgFolder[i])
     images.push(img)
     // $('#inputImg').get(i).src = img.src;
     // $('#inputMultipleImg').get(i).src = img.src;
+    // container.appendChild(img.src);
   }
   // console.log($(`#sliderImg`).get())
   $(`#sliderImg`).get(0).src = images[0].src
   updateResults()
-  return images
 }
 
 function renderImageSelectList(selectListId, onChange, initialValue, withFaceExpressionImages) {
