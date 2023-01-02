@@ -20,7 +20,10 @@
     <div style="position: relative" class="margin">
       <!-- <img id="inputImg" src="" style="max-width: 800px;" />
       <canvas id="overlay" /> -->
-      <img id="sliderimage" src="" style="max-width: 800px;" />
+      <!-- <img id="inputMultipleImg" multiple="multiple" src="" style="max-width: 800px;" />
+      <canvas id="overlay" /> -->
+      <img id="sliderImg" src="" style="max-width: 800px;" />
+      <!-- <canvas id="overlay" /> -->
       <canvas id="slideroverlay" />
     </div>
 
@@ -39,7 +42,7 @@
       </button>
       <!-- <input id="queryImgUploadInput" type="file" class="waves-effect btn bold" onchange="loadImageFromUpload()" accept=".jpg, .jpeg, .png"> -->
       <!-- image_selection_control -->
-      <input id="queryImgUploadFolderInput" type="file" class="waves-effect btn bold" onchange="loadImagesFromFolder()" accept=".jpg, .jpeg, .png">
+      <input id="queryImgUploadFolderInput" type="file" multiple="multiple" class="waves-effect btn bold" onchange="loadAllImagesFromFolder()" accept=".jpg, .jpeg, .png">
       <!-- image_folder_selection_control -->
     </div>
 
@@ -122,17 +125,21 @@
       if (!isFaceDetectionModelLoaded()) {
         return
       }
-      const inputImgEl = $('#inputImg').get()
-      const options = getFaceDetectorOptions()
+      // const inputImgEl = $('#inputImg').get()
+      // const inputImgEl = $('#inputMultipleImg').get()
+      // const inputImgEl = $('#queryImgUploadFolderInput').get()
+      // const inputImgEl = $('#sliderImg').get()
+      // const options = getFaceDetectorOptions()
 
-      var results = []
-      for (let i = 0; i < inputImgEl.length; i++) {
-        const result = await faceapi.detectAllFaces(inputImgEl[i], options)
-        // results.push(result)
-        const canvas = $('#overlay').get(i)
-        faceapi.matchDimensions(canvas, inputImgEl[i])
-        faceapi.draw.drawDetections(canvas, faceapi.resizeResults(result, inputImgEl[i]))
-      }
+      // var results = []
+      // for (let i = 0; i < inputImgEl.length; i++) {
+      //   const result = await faceapi.detectAllFaces(inputImgEl[i], options)
+      //   // results.push(result)
+      //   console.log(inputImgEl[i])
+      //   const canvas = $('#overlay').get(i)
+      //   faceapi.matchDimensions(canvas, inputImgEl[i])
+      //   faceapi.draw.drawDetections(canvas, faceapi.resizeResults(result, inputImgEl[i]))
+      // }
       // console.log(results[0])
       // const canvas = $('#overlay').get()
       // faceapi.matchAllDimensions(canvas, inputImgEl)
@@ -145,6 +152,13 @@
       // const canvas = $('#overlay').get(0)
       // faceapi.matchDimensions(canvas, inputImgEl)
       // faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
+      const inputImgEl = $('#sliderImg').get(0)
+      const options = getFaceDetectorOptions()
+      const results = await faceapi.detectAllFaces(inputImgEl, options)
+      console.log(results[0])
+      const canvas = $('#slideroverlay').get(0)
+      faceapi.matchDimensions(canvas, inputImgEl)
+      faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
     }
 
     async function run() {

@@ -71,6 +71,12 @@
   left: 0;
 }
 
+#slideroverlay, .slideroverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #facesContainer canvas {
   margin: 10px;
 }

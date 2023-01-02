@@ -1,24 +1,37 @@
 async function onSelectedImageChanged(uri) {
   const img = await faceapi.fetchImage(uri)
-  $(`#inputImg`).get(0).src = img.src
+  // $(`#inputImg`).get(0).src = img.src
+  // $(`#inputMultipleImg`).get(0).src = img.src
+  $(`#sliderImg`).get(0).src = img.src
   updateResults()
 }
 
+// function LoadNthImg(n) {
+//   const imgFolder = $('#queryImgUploadFolderInput').get(0).files
+//   const img = await faceapi.bufferToImage(imgFolder[n])
+//   $(`#sliderImg`).get(0).src = img.src
+//   updateResults()
+// }
+
 async function loadImageFromUrl(url) {
   const img = await requestExternalImage($('#imgUrlInput').val())
-  $('#inputImg').get(0).src = img.src
+  // $('#inputImg').get(0).src = img.src
+  // $(`#inputMultipleImg`).get(0).src = img.src
+  $(`#sliderImg`).get(0).src = img.src
   updateResults()
 }
 
 async function loadImageFromUpload() {
-    const imgFile = $('#queryImgUploadInput').get(0).files[0]
-    const img = await faceapi.bufferToImage(imgFile)
-    $('#inputImg').get(0).src = img.src
-    updateResults()
+  const imgFile = $('#queryImgUploadInput').get(0).files[0]
+  const img = await faceapi.bufferToImage(imgFile)
+  // $('#inputImg').get(0).src = img.src
+  // $(`#inputMultipleImg`).get(0).src = img.src
+  $(`#sliderImg`).get(0).src = img.src
+  updateResults()
 }
 
 // write a function to load a folder of images.
-async function loadImagesFromFolder() {
+async function loadAllImagesFromFolder() {
   const imgFolder = $('#queryImgUploadFolderInput').get(0).files
   // console.log(imgFolder)
   // console.log(imgFolder[0])
@@ -35,10 +48,14 @@ async function loadImagesFromFolder() {
   var images = []
   for (let i = 0; i < numFiles; i++) {
     const img = await faceapi.bufferToImage(imgFolder[i])
-    // images.push(img)
-    $('#inputImg').get(i).src = img.src;
+    images.push(img)
+    // $('#inputImg').get(i).src = img.src;
+    // $('#inputMultipleImg').get(i).src = img.src;
   }
+  // console.log($(`#sliderImg`).get())
+  $(`#sliderImg`).get(0).src = images[0].src
   updateResults()
+  return images
 }
 
 function renderImageSelectList(selectListId, onChange, initialValue, withFaceExpressionImages) {

@@ -166,3 +166,17 @@ function renderOption(parent, text, value) {
   option.value = value
   parent.appendChild(option)
 }
+
+async function ImageSlider(i) {
+  //set the number of slider show
+  const imgFolder = $('#queryImgUploadFolderInput').get(0).files
+  if (i >= imgFolder.length)
+      i = 0;
+  else
+      i++;
+  //image url
+  const img = await faceapi.bufferToImage(imgFolder[i])
+  $(`#sliderImg`).get(0).src = img.src
+  setInterval("ImageSlider(i+1)", 300);
+};
+
