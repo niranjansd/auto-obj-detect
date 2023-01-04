@@ -45,6 +45,10 @@ function renderNavBar(navbarId, exampleUri) {
       name: 'Face Recognition'
     },
     {
+      uri: 'face_rextractor',
+      name: 'Face Rextractor'
+    },
+    {
       uri: 'face_extraction',
       name: 'Face Extraction'
     },

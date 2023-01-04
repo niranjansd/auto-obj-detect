@@ -32,28 +32,8 @@
     <div id="facesContainer"></div>
 
     <div class="row side-by-side">
-      <!-- face_detector_selection_control -->
-      <div id="face_detector_selection_control" class="row input-field" style="margin-right: 20px;">
-        <select id="selectFaceDetector">
-          <option value="ssd_mobilenetv1">SSD Mobilenet V1</option>
-          <option value="tiny_face_detector">Tiny Face Detector</option>
-        </select>
-        <label>Select Face Detector</label>
-      </div>
-      <!-- face_detector_selection_control -->
-
       <!-- image_selection_control -->
       <div id="selectList"></div>
-      <div class="row">
-        <label for="imgUrlInput">Get image from URL:</label>
-        <input id="imgUrlInput" type="text" class="bold">
-      </div>
-      <button
-        class="waves-effect waves-light btn"
-        onclick="loadImageFromUrl()"
-      >
-        Ok
-      </button>
       <!-- <input id="queryImgUploadInput" type="file" class="waves-effect btn bold" onchange="loadImageFromUpload()" accept=".jpg, .jpeg, .png"> -->
       <input id="queryImgUploadFolderInput" type="file" multiple="multiple" class="waves-effect btn bold" onchange="loadAllImagesFromFolder()" accept=".jpg, .jpeg, .png">
       <!-- image_selection_control -->
