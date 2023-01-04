@@ -100,7 +100,7 @@
     <!-- ssd_mobilenetv1_controls -->
 
     <!-- tiny_face_detector_controls -->
-    <span id="tiny_face_detector_controls">
+    <!-- <span id="tiny_face_detector_controls">
       <div class="row side-by-side">
         <div class="row input-field" style="margin-right: 20px;">
           <select id="inputSize">
@@ -131,69 +131,69 @@
           <i class="material-icons left">+</i>
         </button>
       </div>
-    </span>
+    </span> -->
     <!-- tiny_face_detector_controls -->
 
-  </body>
+  <!-- </body> -->
 
-  <script>
-    async function updateResults() {
-      if (!isFaceDetectionModelLoaded()) {
-        return
-      }
-      // const inputImgEl = $('#inputImg').get()
-      // const inputImgEl = $('#inputMultipleImg').get()
-      // const inputImgEl = $('#queryImgUploadFolderInput').get()
-      // const inputImgEl = $('#sliderImg').get()
-      // const options = getFaceDetectorOptions()
-
-      // var results = []
-      // for (let i = 0; i < inputImgEl.length; i++) {
-      //   const result = await faceapi.detectAllFaces(inputImgEl[i], options)
-      //   // results.push(result)
-      //   console.log(inputImgEl[i])
-      //   const canvas = $('#overlay').get(i)
-      //   faceapi.matchDimensions(canvas, inputImgEl[i])
-      //   faceapi.draw.drawDetections(canvas, faceapi.resizeResults(result, inputImgEl[i]))
-      // }
-      // console.log(results[0])
-      // const canvas = $('#overlay').get()
-      // faceapi.matchAllDimensions(canvas, inputImgEl)
-      // faceapi.draw.drawAllDetections(canvas, faceapi.resizeAllResults(results, inputImgEl))
-
-      // const inputImgEl = $('#inputImg').get(0)
-      // const options = getFaceDetectorOptions()
-      // const results = await faceapi.detectAllFaces(inputImgEl, options)
-      // console.log(results[0])
-      // const canvas = $('#overlay').get(0)
-      // faceapi.matchDimensions(canvas, inputImgEl)
-      // faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
-      // setImageVisible("inputMultipleImg", false)
-      const inputImgEl = $('#sliderImg').get(0)
-      const options = getFaceDetectorOptions()
-      const results = await faceapi.detectAllFaces(inputImgEl, options)
-      // console.log(results[0])
-      const canvas = $('#slideroverlay').get(0)
-      faceapi.matchDimensions(canvas, inputImgEl)
-      faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
+<script>
+  async function updateResults() {
+    if (!isFaceDetectionModelLoaded()) {
+      return
     }
+    // const inputImgEl = $('#inputImg').get()
+    // const inputImgEl = $('#inputMultipleImg').get()
+    // const inputImgEl = $('#queryImgUploadFolderInput').get()
+    // const inputImgEl = $('#sliderImg').get()
+    // const options = getFaceDetectorOptions()
 
-    async function run() {
-      // load face detection
-      await changeFaceDetector(SSD_MOBILENETV1)
-      // const option = document.createElement('inputMultipleImg')
-      // document.createElement('inputMultipleImg');
+    // var results = []
+    // for (let i = 0; i < inputImgEl.length; i++) {
+    //   const result = await faceapi.detectAllFaces(inputImgEl[i], options)
+    //   // results.push(result)
+    //   console.log(inputImgEl[i])
+    //   const canvas = $('#overlay').get(i)
+    //   faceapi.matchDimensions(canvas, inputImgEl[i])
+    //   faceapi.draw.drawDetections(canvas, faceapi.resizeResults(result, inputImgEl[i]))
+    // }
+    // console.log(results[0])
+    // const canvas = $('#overlay').get()
+    // faceapi.matchAllDimensions(canvas, inputImgEl)
+    // faceapi.draw.drawAllDetections(canvas, faceapi.resizeAllResults(results, inputImgEl))
 
-      // start processing image
-      updateResults()
-    }
+    // const inputImgEl = $('#inputImg').get(0)
+    // const options = getFaceDetectorOptions()
+    // const results = await faceapi.detectAllFaces(inputImgEl, options)
+    // console.log(results[0])
+    // const canvas = $('#overlay').get(0)
+    // faceapi.matchDimensions(canvas, inputImgEl)
+    // faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
+    // setImageVisible("inputMultipleImg", false)
+    const inputImgEl = $('#sliderImg').get(0)
+    const options = getFaceDetectorOptions()
+    const results = await faceapi.detectAllFaces(inputImgEl, options)
+    // console.log(results[0])
+    const canvas = $('#slideroverlay').get(0)
+    faceapi.matchDimensions(canvas, inputImgEl)
+    faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
+  }
 
-    $(document).ready(function() {
-      renderNavBar('#navbar', 'face_detection')
-      initImageSelectionControls()
-      initFaceDetectionControls()
-      run()
-    })
-  </script>
+  async function run() {
+    // load face detection
+    await changeFaceDetector(SSD_MOBILENETV1)
+    // const option = document.createElement('inputMultipleImg')
+    // document.createElement('inputMultipleImg');
+
+    // start processing image
+    updateResults()
+  }
+
+  $(document).ready(function() {
+    renderNavBar('#navbar', 'face_detection')
+    initImageSelectionControls()
+    initFaceDetectionControls()
+    run()
+  })
+</script>
 </body>
 </html>
