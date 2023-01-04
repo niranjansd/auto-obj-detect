@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script> 
+    var images = [];
+  </script>
 </head>
 <body>
   <div id="navbar"></div>
@@ -17,8 +20,10 @@
       <div class="indeterminate"></div>
     </div>
     <div style="position: relative" class="margin">
-      <img id="inputImg" src="" style="max-width: 800px;" />
-      <canvas id="overlay" />
+      <img id="sliderImg" src="" style="max-width: 800px;" />
+      <canvas id="slideroverlay" />
+      <!-- <img id="inputImg" src="" style="max-width: 800px;" />
+      <canvas id="overlay" /> -->
     </div>
     <div id="facesContainer"></div>
 
@@ -45,8 +50,16 @@
       >
         Ok
       </button>
-      <input id="queryImgUploadInput" type="file" class="waves-effect btn bold" onchange="loadImageFromUpload()" accept=".jpg, .jpeg, .png">
+      <!-- <input id="queryImgUploadInput" type="file" class="waves-effect btn bold" onchange="loadImageFromUpload()" accept=".jpg, .jpeg, .png"> -->
+      <input id="queryImgUploadFolderInput" type="file" multiple="multiple" class="waves-effect btn bold" onchange="loadAllImagesFromFolder()" accept=".jpg, .jpeg, .png">
       <!-- image_selection_control -->
+    </div>
+    <span>
+      <button class="waves-effect waves-light btn" onclick="LoadIthImg(-1)">Prev</button>
+      <button class="waves-effect waves-light btn" onclick="LoadIthImg(+1)">Next</button>
+    </span>
+    <div>
+      <img id="inputMultipleImg" multiple="mutiple" src="" class="noshow" />
     </div>
 
     <!-- ssd_mobilenetv1_controls -->
@@ -73,7 +86,7 @@
     <!-- ssd_mobilenetv1_controls -->
 
     <!-- tiny_face_detector_controls -->
-    <span id="tiny_face_detector_controls">
+    <!-- <span id="tiny_face_detector_controls">
       <div class="row side-by-side">
         <div class="row input-field" style="margin-right: 20px;">
           <select id="inputSize">
@@ -104,7 +117,7 @@
           <i class="material-icons left">+</i>
         </button>
       </div>
-    </span>
+    </span> -->
     <!-- tiny_face_detector_controls -->
 
   </div>
@@ -116,18 +129,31 @@
         return
       }
 
-      const inputImgEl = $('#inputImg').get(0)
+      const inputImgEl = $('#sliderImg').get(0)
       const options = getFaceDetectorOptions()
+      const results = await faceapi.detectAllFaces(inputImgEl, options)
+      // console.log(results[0])
+      // const canvas = $('#slideroverlay').get(0)
+      // faceapi.matchDimensions(canvas, inputImgEl)
+      // faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
+      const faceImages = await faceapi.extractFaces(inputImgEl, results)
 
-      const detections = await faceapi.detectAllFaces(inputImgEl, options)
-      const faceImages = await faceapi.extractFaces(inputImgEl, detections)
+      // const inputImgEl = $('#inputImg').get(0)
+      // const options = getFaceDetectorOptions()
 
-      displayExtractedFaces(faceImages)
+      // const detections = await faceapi.detectAllFaces(inputImgEl, options)
+      // const faceImages = await faceapi.extractFaces(inputImgEl, detections)
+
+      displayExtractedFaces(faceImages, inputImgEl, results)
     }
 
-    function displayExtractedFaces(faceImages) {
-      const canvas = $('#overlay').get(0)
-      faceapi.matchDimensions(canvas, $('#inputImg').get(0))
+    function displayExtractedFaces(faceImages, inputImgEl, results) {
+      // const canvas = $('#overlay').get(0)
+      // faceapi.matchDimensions(canvas, $('#inputImg').get(0))
+
+      const canvas = $('#slideroverlay').get(0)
+      faceapi.matchDimensions(canvas, inputImgEl)
+      faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
 
       $('#facesContainer').empty()
       faceImages.forEach(canvas => $('#facesContainer').append(canvas))
