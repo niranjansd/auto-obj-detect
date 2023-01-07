@@ -155,6 +155,17 @@ function renderNavBar(navbarId, exampleUri) {
   })
 }
 
+function CreateImageButton(canvas, name){
+	var imagebutton = document.createElement("input");
+  imagebutton.type = "checkbox";
+	// var buttonTextEl = document.createElement("span");
+	// buttonTextEl.className = "image-button-text";
+	// buttonTextEl.innerText = name;
+	// imagebutton.appendChild(buttonTextEl);
+	imagebutton.appendChild(canvas);
+  return imagebutton
+}
+  
 function renderSelectList(selectListId, onChange, initialValue, renderChildren) {
   const select = document.createElement('select')
   $(selectListId).get(0).appendChild(select)

@@ -86,6 +86,10 @@
   margin: 10px;
 }
 
+.selectedfordownload {
+  background-color: #26a69a;
+}
+
 input[type="file"]::-webkit-file-upload-button {
   background: #26a69a;
   border: 1px solid gray;

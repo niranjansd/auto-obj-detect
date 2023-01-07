@@ -30,6 +30,7 @@
       <button class="waves-effect waves-light btn" onclick="LoadIthImg(+1)">Next</button>
     </span>
     <div id="facesContainer"></div>
+    <button class="waves-effect waves-light btn" onclick="downloadFaces()">Download</button>
 
     <div class="row side-by-side">
       <!-- image_selection_control -->
@@ -134,9 +135,34 @@
       const canvas = $('#slideroverlay').get(0)
       faceapi.matchDimensions(canvas, inputImgEl)
       faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
-
+      console.log(faceImages)
+      console.log(canvas)
       $('#facesContainer').empty()
-      faceImages.forEach(canvas => $('#facesContainer').append(canvas))
+      // create image button for each element in faceimages
+      for (let i = 0; i < faceImages.length; i++) {
+        const name = `face${i}`
+        const canvas = faceImages[i]
+        // canvas.setAttribute('height', 144)
+        // canvas.setAttribute('width', 96)
+        // button = CreateImageButton(canvas, name)
+        buttonel = document.createElement('a')
+        buttoninput = document.createElement('input')
+        buttoninput.setAttribute('id', name+'el')
+        buttoninput.setAttribute('type', 'checkbox')
+        button = document.createElement('button'+name)
+        button.setAttribute('onclick', 'selectImage(this)')
+        button.setAttribute('id', name)
+        button.setAttribute('height', 150)
+        button.setAttribute('width', 100)
+        // button.setAttribute('canvas', canvas)
+        button.appendChild(canvas)
+        buttonel.appendChild(buttoninput)
+        buttonel.appendChild(button)
+        $('#facesContainer').append(buttonel)
+      }
+      console.log($('#facesContainer').get())
+      // $('#facesContainer').empty()
+      // faceImages.forEach(canvas => $('#facesContainer').append(canvas))
     }
 
     async function run() {

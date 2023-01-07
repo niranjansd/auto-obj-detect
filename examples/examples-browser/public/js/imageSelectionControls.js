@@ -1,3 +1,5 @@
+// const { canvas } = require("../../../examples-nodejs/commons");
+
 var slideIndex = 0;
 
 async function onSelectedImageChanged(uri) {
@@ -82,6 +84,40 @@ async function loadAllImagesFromFolder() {
   // console.log($(`#sliderImg`).get())
   $(`#sliderImg`).get(0).src = images[0].src
   updateResults()
+}
+
+// // write a function to add class to the selected image.
+function selectImage(elem) {
+  // check if elem has class 'selected'
+  // if yes, remove class 'selected'
+  // if no, add class 'selected'
+  console.log(elem)
+  if (elem.classList.contains('selectedfordownload')) {
+    elem.classList.remove('selectedfordownload')
+  }
+  else {
+    elem.classList.add('selectedfordownload')
+  }
+  console.log(elem)
+}
+
+// $(function(){
+//   $("#faceToggle").click(function(){
+//       $('#faceToggle').toggleClass('selectedfordownload right');
+//   });
+// });
+
+var downloadFaces = function(){
+  faces = $('.selectedfordownload').get()
+  //download the canvas images in png format
+  for (var i = 0; i < faces.length; i++) {
+    canvas = faces[i].getElementsByTagName('canvas')[0];
+    image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+    var link = document.createElement('a');
+    link.download = faces[i].id+'.png';
+    link.href = image;
+    link.click();
+  }
 }
 
 function renderImageSelectList(selectListId, onChange, initialValue, withFaceExpressionImages) {
