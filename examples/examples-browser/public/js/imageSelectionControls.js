@@ -98,6 +98,7 @@ function selectImage(elem) {
   else {
     elem.classList.add('selectedfordownload')
   }
+  updateDownloadButton()
   console.log(elem)
 }
 
@@ -106,6 +107,19 @@ function selectImage(elem) {
 //       $('#faceToggle').toggleClass('selectedfordownload right');
 //   });
 // });
+// Define the function to update the download button
+function updateDownloadButton() {
+  faces = $('.selectedfordownload').get()
+  downloadBtn = $('.download-btn').get()[0]
+  // Check if at least one object is selected
+  if (faces) {
+    if (faces.length > 0){
+      downloadBtn.disabled = false; // Enable the download button
+    }
+  } else {
+    downloadBtn.disabled = true; // Disable the download button
+  }
+}
 
 var downloadFaces = function(){
   faces = $('.selectedfordownload').get()
