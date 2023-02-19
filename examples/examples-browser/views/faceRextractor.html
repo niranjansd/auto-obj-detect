@@ -111,14 +111,17 @@
       }
 
       const inputImgEl = $('#sliderImg').get(0)
+      // const inputImgEl = $('#sliderImg').get()
+      // console.log(inputImgEl)
       const options = getFaceDetectorOptions()
       const results = await faceapi.detectAllFaces(inputImgEl, options)
+      // const results = await faceapi.detectAllFaces(images, options)
       // console.log(results[0])
       // const canvas = $('#slideroverlay').get(0)
       // faceapi.matchDimensions(canvas, inputImgEl)
       // faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
       const faceImages = await faceapi.extractFaces(inputImgEl, results)
-
+      // console.log(faceImages)
       // const inputImgEl = $('#inputImg').get(0)
       // const options = getFaceDetectorOptions()
 

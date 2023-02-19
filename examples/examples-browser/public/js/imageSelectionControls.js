@@ -11,18 +11,28 @@ async function onSelectedImageChanged(uri) {
 }
 
 async function LoadNthImg(n) {
-  if (images.length == 1)
+  if (images.length == 1) {
+    n = 0;
     return
+  }
+  // if (n >= images.length) {
+  //   while (n >= images.length) {
+  //     // n -= imgFolder.length;
+  //     n = n - images.length;
+  //   }
+  //   return
+  // }
   if (n >= images.length) {
     // n -= imgFolder.length;
     n = images.length - 1;
     return
   }
-  else if (n < 0 && Math.abs(n) <= images.length) {
+  else if (n < 0) {
     // n += imgFolder.length;
     n = 0;
     return
   }
+  console.log(n)
   slideIndex = n
   $(`#sliderImg`).get(0).src = images[n].src
   updateResults()
@@ -30,7 +40,7 @@ async function LoadNthImg(n) {
 
 async function LoadIthImg(n) {
   console.log(n)
-  console.log(slideIndex + n)
+  // console.log(slideIndex + n)
   LoadNthImg(slideIndex + n)
 }
 

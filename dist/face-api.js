@@ -1891,6 +1891,13 @@ function getMediaDimensions(input) {
           });
       });
   }
+  /**
+   * Extracts the face regions from multiple images.
+   *
+   * @param inputs The image that face detection has been performed on.
+   * @param detections The face detection results or face bounding boxes for that image.
+   * @returns The Canvases of the corresponding image region for each detected face.
+   */
 
   /**
    * Extracts the tensors of the image regions containing the detected faces.
