@@ -115,6 +115,8 @@ function updateDownloadButton() {
   if (faces) {
     if (faces.length > 0){
       downloadBtn.disabled = false; // Enable the download button
+    } else {
+      downloadBtn.disabled = true; // Disable the download button
     }
   } else {
     downloadBtn.disabled = true; // Disable the download button
