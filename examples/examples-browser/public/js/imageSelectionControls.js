@@ -46,6 +46,11 @@ async function LoadIthImg(n) {
   LoadNthImg(slideIndex + n)
 }
 
+async function ClearImgs() {
+  images = []
+  updateResults()
+}
+
 async function loadImageFromUrl(url) {
   const img = await requestExternalImage($('#imgUrlInput').val())
   // $('#inputImg').get(0).src = img.src
