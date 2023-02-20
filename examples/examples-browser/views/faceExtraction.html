@@ -124,7 +124,7 @@
 
   <script>
 
-    async function updateResults() {
+    async function updateSliderResults() {
       if (!isFaceDetectionModelLoaded()) {
         return
       }
@@ -164,7 +164,7 @@
       await changeFaceDetector(selectedFaceDetector)
 
       // start processing image
-      updateResults()
+      updateSliderResults()
     }
 
     $(document).ready(function() {

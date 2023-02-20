@@ -105,14 +105,81 @@
 
   <script>
 
-    async function updateResults() {
+async function updateResults() {
+      if (!isFaceDetectionModelLoaded()) {
+        return
+      }
+
+      const inputImgEl = images
+      console.log(images)
+      // const inputImgEl = $('#sliderImg').get()
+      // const inputImgEl = $('#sliderImg').get(0)
+      console.log('gggggggg')
+      console.log(inputImgEl)
+      const options = getFaceDetectorOptions()
+      results = [] 
+      faceImages = []
+      for (var i = 0; i < inputImgEl.length; i++) {
+        const iresults = await faceapi.detectAllFaces(inputImgEl[i], options)
+        console.log(iresults)
+        results.push(iresults)
+        ifaceImages = await faceapi.extractFaces(inputImgEl[i], iresults)
+        console.log(ifaceImages)
+        faceImages = faceImages.concat(ifaceImages)
+        console.log(faceImages)
+      }
+      // console.log(results[0])
+      console.log(faceImages)
+      // const inputImgEl = $('#inputImg').get(0)
+      // const options = getFaceDetectorOptions()
+
+      // const detections = await faceapi.detectAllFaces(inputImgEl, options)
+      // const faceImages = await faceapi.extractFaces(inputImgEl, detections)
+
+      displayAllExtractedFaces(faceImages)
+    }
+
+    function displayAllExtractedFaces(faceImages) {
+      // const canvas = $('#overlay').get(0)
+      // faceapi.matchDimensions(canvas, $('#inputImg').get(0))
+
+      $('#facesContainer').empty()
+      // create image button for each element in faceimages
+      for (let i = 0; i < faceImages.length; i++) {
+        const name = `face${i}`
+        const canvas = faceImages[i]
+        // canvas.setAttribute('height', 144)
+        // canvas.setAttribute('width', 96)
+        // button = CreateImageButton(canvas, name)
+        // create a button with name with i suffix
+        buttonel = document.createElement('a'+i.toString())
+        buttoninput = document.createElement('input'+i.toString())
+        buttoninput.setAttribute('id', name+'el'+i.toString())
+        buttoninput.setAttribute('type', 'checkbox')
+        button = document.createElement('button'+name+i.toString())
+        button.setAttribute('onclick', 'selectImage(this)')
+        button.setAttribute('id', name+i.toString())
+        button.setAttribute('height', 150)
+        button.setAttribute('width', 100)
+        // button.setAttribute('canvas', canvas)
+        button.appendChild(canvas)
+        buttonel.appendChild(buttoninput)
+        buttonel.appendChild(button)
+        $('#facesContainer').append(buttonel)
+      }
+      console.log($('#facesContainer').get())
+      // $('#facesContainer').empty()
+      // faceImages.forEach(canvas => $('#facesContainer').append(canvas))
+    }
+
+    async function updateSliderResults() {
       if (!isFaceDetectionModelLoaded()) {
         return
       }
 
       const inputImgEl = $('#sliderImg').get(0)
       // const inputImgEl = $('#sliderImg').get()
-      // console.log(inputImgEl)
+      console.log(inputImgEl)
       const options = getFaceDetectorOptions()
       const results = await faceapi.detectAllFaces(inputImgEl, options)
       // const results = await faceapi.detectAllFaces(images, options)
@@ -121,7 +188,7 @@
       // faceapi.matchDimensions(canvas, inputImgEl)
       // faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
       const faceImages = await faceapi.extractFaces(inputImgEl, results)
-      // console.log(faceImages)
+      console.log(faceImages)
       // const inputImgEl = $('#inputImg').get(0)
       // const options = getFaceDetectorOptions()
 
@@ -137,7 +204,7 @@
 
       const canvas = $('#slideroverlay').get(0)
       faceapi.matchDimensions(canvas, inputImgEl)
-      faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
+      // faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, inputImgEl))
       console.log(faceImages)
       console.log(canvas)
       $('#facesContainer').empty()
@@ -173,6 +240,7 @@
       await changeFaceDetector(selectedFaceDetector)
 
       // start processing image
+      // updateSliderResults()
       updateResults()
     }
 

@@ -7,6 +7,7 @@ async function onSelectedImageChanged(uri) {
   // $(`#inputImg`).get(0).src = img.src
   // $(`#inputMultipleImg`).get(0).src = img.src
   $(`#sliderImg`).get(0).src = img.src
+  // updateSliderResults()
   updateResults()
 }
 
@@ -35,6 +36,7 @@ async function LoadNthImg(n) {
   console.log(n)
   slideIndex = n
   $(`#sliderImg`).get(0).src = images[n].src
+  // updateSliderResults()
   updateResults()
 }
 
@@ -49,6 +51,7 @@ async function loadImageFromUrl(url) {
   // $('#inputImg').get(0).src = img.src
   // $(`#inputMultipleImg`).get(0).src = img.src
   $(`#sliderImg`).get(0).src = img.src
+  // updateSliderResults()
   updateResults()
 }
 
@@ -58,6 +61,7 @@ async function loadImageFromUpload() {
   // $('#inputImg').get(0).src = img.src
   // $(`#inputMultipleImg`).get(0).src = img.src
   $(`#sliderImg`).get(0).src = img.src
+  // updateSliderResults()
   updateResults()
 }
 
@@ -93,6 +97,8 @@ async function loadAllImagesFromFolder() {
   }
   // console.log($(`#sliderImg`).get())
   $(`#sliderImg`).get(0).src = images[0].src
+  // updateResults()
+  // updateSliderResults()
   updateResults()
 }
 
