@@ -46,12 +46,12 @@ function renderNavBar(navbarId, exampleUri) {
     },
     {
       uri: 'face_rextractor',
-      name: 'Face Rextractor'
+      name: 'FaceCropAI'
     },
-    {
-      uri: 'face_extraction',
-      name: 'Face Extraction'
-    },
+    // {
+    //   uri: 'face_extraction',
+    //   name: 'FaceCropAI'
+    // },
     // {
     //   uri: 'video_face_tracking',
     //   name: 'Video Face Tracking'
