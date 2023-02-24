@@ -20,7 +20,7 @@
       <div class="indeterminate"></div>
     </div>
     <div style="position: relative" class="margin">
-      <img id="sliderImg" src="" style="max-width: 800px;" />
+      <img id="sliderImg" src="" style="max-width: 800px; max-height: 800px;" />
       <canvas id="slideroverlay" />
       <!-- <img id="inputImg" src="" style="max-width: 800px;" />
       <canvas id="overlay" /> -->
@@ -246,7 +246,7 @@ async function updateResults() {
     }
 
     $(document).ready(function() {
-      renderNavBar('#navbar', 'face_extraction')
+      renderNavBar('#navbar', 'face_rextractor')
       initImageSelectionControls()
       initFaceDetectionControls()
       run()
